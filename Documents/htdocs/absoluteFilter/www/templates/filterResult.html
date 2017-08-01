@@ -1,0 +1,35 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-positive">
+        <button class="button button-clear back-arrow-margin header-btn-center" ng-click="getBack();"> 
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <h1 class="title header-title-center">Filter Results</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div ng-if="filterData.length > 0">
+            <div class="card filter-card" ng-repeat="item in filterData track by $index">
+                <div class="item item-text-wrap">
+                    <label>MR Numbar: <span>{{item.name}}</span></label><br>
+                    <label>Owner Name: <span>{{item.owner}}</span></label><br>
+                    <label>Insurer: <span>{{item.insurerName}}</span></label><br>
+                    <label>Insured: <span>{{item.insuredName}}</span></label><br>
+                    <label>City: <span>{{item.city}}</span></label><br>
+                    <label>Nature of survey: <span>{{item.department}}</span></label><br>
+                    <label>Estimated Loss: <span>{{item.intimatedLoss}}</span></label><br>
+                    <label>Status: <span>{{item.timelineStatus}}</span></label>
+                </div>
+                <div class="row filter-card-row">
+                    <div class="col">
+                        Timeline
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="filterData.length == 0">
+            <div class="no-data">
+                <p>NO DATA FOUND</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

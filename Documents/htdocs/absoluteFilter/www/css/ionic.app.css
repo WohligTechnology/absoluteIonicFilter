@@ -1,0 +1,119 @@
+.nav-bar-bgcolor{
+    background-color: #2f95ed !important;
+}
+
+.botton-margin{
+    margin-bottom: 10px !important;
+}
+
+.header-right-button{
+    -webkit-user-select: none; 
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    margin: 0px 3px !important;
+}
+
+.back-arrow-margin {
+    margin-left: -5px !important;
+    margin-right: 5px !important;
+}
+
+.remove-padding{
+    padding: 0px !important;
+}
+
+.button-border{
+    border-radius: 0px !important;
+}
+
+.border-bottom-css.active{
+      border-bottom: 2px solid #387ef5 !important;    
+}
+
+.bg-color{
+    border-color: snow !important;
+    background-color: snow !important;
+}
+
+.filterPage-list-btn{
+    border: 1px solid #387ef5 !important;
+    width: 100%;
+    color: white !important;
+    background-color: #387ef5 !important;
+    margin-bottom: 10px !important;
+    border-radius: 2px !important;
+}
+
+.header-badge{
+  top: 0px !important;
+    left: 5px;
+}
+
+.filter-card-row{
+    background-color: #387ef5;
+    text-align: center;
+    color: white;
+}
+
+.filter-card{
+    padding-top: 1px;
+    padding-bottom: 0px !important;
+    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 2px !important;
+    border: 1px solid #ccc;
+}
+
+.row-bottom-border{
+    border-bottom: 1px solid #dddddd;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.checkbox input:before, .checkbox .checkbox-icon:before{
+    border-color:#dddddd !important;
+}
+
+.estimated-loss-input{
+    border: 1px solid #dddddd !important;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.select-width{
+    width:100%;
+}
+
+.no-data{
+    text-align: center;
+    margin-top: 50%;
+    font-size: 20px;
+}
+
+.bar{
+    height: 63px !important;
+}
+
+.bar-subheader {
+    top: 63px !important;
+    height: 45px !important;
+}
+
+.has-header {
+    top: 63px !important;
+}
+
+.header-title-center{
+    top:8px !important;
+}
+.search-date{
+    padding: 10px;
+    font-size: 18px;
+}
+.header-btn-center{
+    max-height: none !important;
+}
+.date-align{
+    /*text-align: center;*/
+    margin-top: 10px;
+    font-size:18px;
+}
