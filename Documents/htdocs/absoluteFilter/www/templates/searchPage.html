@@ -8,7 +8,7 @@
         <button class="button button-clear back-arrow-margin" ng-click="getBack();"> 
             <i class="icon ion-android-arrow-back"></i>
         </button>
-        <label class="item-input-wrapper" focus-me>
+        <label class="item-input-wrapper search-input-resize" focus-me>
             <i class="icon ion-ios7-search placeholder-icon"></i>
             <input type="search" ng-model="searchObj.searchText" placeholder="Search" ng-change="searchRecord(searchObj.searchText,searchField);">
         </label>
@@ -21,8 +21,8 @@
             <a class="button remove-padding button-border border-bottom-css {{activeButton1}} bg-color" ng-click="changeTab(1);">Select</a>
             <a class="button remove-padding button-border border-bottom-css {{activeButton2}} bg-color" ng-click="changeTab(2);">
                 <!-- FOR OWNER NAME -->
-                <span ng-if="(filterObj.ownerName.length == 0 ||filterObj.ownerName == undefined) && searchField == 'ownerName'">My List<span class="badge badge-assertive header-badge">0</span></span>
-                <span ng-if="filterObj.ownerName.length > 0 && searchField == 'ownerName'">My List<span class="badge badge-assertive header-badge">{{filterObj.ownerName.length}}</span></span>
+                <span ng-if="(filterObj.owner.length == 0 ||filterObj.owner == undefined) && searchField == 'owner'">My List<span class="badge badge-assertive header-badge">0</span></span>
+                <span ng-if="filterObj.owner.length > 0 && searchField == 'owner'">My List<span class="badge badge-assertive header-badge">{{filterObj.owner.length}}</span></span>
 
                 <!-- FOR INSURER -->
                 <span ng-if="(filterObj.insurer.length == 0 ||filterObj.insurer == undefined) && searchField == 'insurer'">My List<span class="badge badge-assertive header-badge">0</span></span>
@@ -107,8 +107,8 @@
             </div>
 
             <!-- FOR OWNER NAME -->
-            <div class="item item-divider" ng-if="filterObj.ownerName.length > 0 && searchField=='ownerName'" style="padding: 0">
-                <div class="row row-bottom-border" ng-repeat="item in filterObj.ownerName track by $index">
+            <div class="item item-divider" ng-if="filterObj.owner.length > 0 && searchField=='owner'" style="padding: 0">
+                <div class="row row-bottom-border" ng-repeat="item in filterObj.owner track by $index">
                     <div class="col col-75" style="padding: 16px;">
                         <h2>{{item.name}}</h2>
                     </div>

@@ -33,6 +33,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     $stateProvider
 
       // setup an abstract state for the tabs directive
+      .state('app', {
+        cache: false,
+        url: '/app',
+        abstract: true,
+        templateUrl: 'templates/menu.html',
+        controller: 'AppCtrl'
+      })
+
       .state('filter', {
         url: '/filter',
         cache: false,
@@ -54,11 +62,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       //   controller: 'SearchPageCtrl' 
       // })
 
-      .state('filterResult', {
+      .state('app.filterResult', {
         url: '/filterResult',
         cache: false,
-        templateUrl: 'templates/filterResult.html',
-        controller: 'FilterResultCtrl'
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/filterResult.html',
+            controller: 'FilterResultCtrl'
+          }
+        }
       })
 
       .state('timelinestatus', {
@@ -75,9 +87,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'DateCtrl'
       })
 
+      .state('options', {
+        url: '/options',
+        cache: false,
+        templateUrl: 'templates/options.html',
+        controller: 'OptionsCtrl'
+      })
+
+      .state('searchAssginment', {
+        url: '/searchAssginment',
+        cache: false,
+        templateUrl: 'templates/searchAssginment.html',
+        controller: 'SearchAssginmentCtrl'
+      })
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/filter');
+    $urlRouterProvider.otherwise('app/filterResult');
 
   })
   .filter('uploadpath', function () {

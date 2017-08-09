@@ -1,17 +1,15 @@
-connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, MyServices, $ionicPlatform) {
+connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, MyServices, $ionicPlatform, $ionicScrollDelegate) {
 
     $scope.searchObj = {};
     $scope.searchObj.searchText = null;
     $scope.searchField = $stateParams.label;
     $scope.filterObj = {};
     $scope.filterObj = _.cloneDeep($.jStorage.get('filterObj'));
-    // $scope.preSelectedArray = _.cloneDeep($scope.filterObj);
     $scope.searchResultArray = [];
     $scope.isList = 1;
     $scope.activeButton1 = 'active';
-    // console.log("$scope.preSelectedArray", $scope.preSelectedArray);
 
-    _.each($scope.filterObj.ownerName, function (n) {
+    _.each($scope.filterObj.owner, function (n) {
         n.checked = true;
     });
 
@@ -19,10 +17,12 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
     //To switch tab
     $scope.changeTab = function (value) {
         if (value == 1) {
+            $ionicScrollDelegate.scrollTop();
             $scope.isList = 1;
             $scope.activeButton1 = 'active';
             $scope.activeButton2 = '';
         } else {
+            $ionicScrollDelegate.scrollTop();
             $scope.isList = 2;
             $scope.activeButton1 = '';
             $scope.activeButton2 = 'active';
@@ -33,7 +33,7 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
     $scope.searchRecord = function (value1, value2) {
 
         switch (value2) {
-            case "ownerName":
+            case "owner":
                 var url = 'Employee/getBackendEmployeeOnly';
                 break;
             case "insurer":
@@ -61,17 +61,17 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
         MyServices.searchRecord({ "keyword": value1 }, { url: url }, function (data) {
             // console.log("my data", data);
             switch (value2) {
-                case "ownerName":
-                    if ($scope.filterObj.ownerName == undefined || $scope.filterObj.ownerName.length == 0) {
+                case "owner":
+                    if ($scope.filterObj.owner == undefined || $scope.filterObj.owner.length == 0) {
                         // _.each(data.data.results, function (n) {
                         //     n.checked = false;
                         //     $scope.searchResultArray.push(n);
                         // })
                         $scope.searchResultArray = data.data.results;
-                    } else if ($scope.filterObj.ownerName.length > 0) {
-                        console.log("$scope.filterObj.ownerName", $scope.filterObj.ownerName);
+                    } else if ($scope.filterObj.owner.length > 0) {
+                        console.log("$scope.filterObj.owner", $scope.filterObj.owner);
                         console.log("data.data.results", data.data.results);
-                        var demo = _.differenceBy(data.data.results, $scope.filterObj.ownerName, '_id');
+                        var demo = _.differenceBy(data.data.results, $scope.filterObj.owner, '_id');
                         // _.each(demo, function (n) {
                         //     n.checked = false;
                         //     $scope.searchResultArray.push(n);
@@ -217,9 +217,9 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
     $scope.getMyResult = function (value1, value2) {
 
         // switch (value2) {
-        //     case "ownerName":
+        //     case "owner":
         //         // var filterObj = $.jStorage.get('filterObj');
-        //         // filterObj.ownerName = value1.name;
+        //         // filterObj.owner = value1.name;
         //         // filterObj.ownerId = value1._id;
         //         $.jStorage.set('filterObj', $scope.filterObj);
         //         $state.go('filter');
@@ -235,21 +235,21 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
     $scope.selectItem = function (obj, fieldType) {
 
         switch (fieldType) {
-            case "ownerName":
-                var selectedItem = _.find($scope.filterObj.ownerName, function (o) {
+            case "owner":
+                var selectedItem = _.find($scope.filterObj.owner, function (o) {
                     if (o._id == obj._id) {
                         return o;
                     }
                 });
                 console.log(selectedItem);
                 if (selectedItem == undefined) {
-                    if ($scope.filterObj.ownerName == undefined) {
-                        $scope.filterObj.ownerName = [];
-                        $scope.filterObj.ownerName.push({ _id: obj._id, name: obj.name, email: obj.email, photo: obj.photo, checked: true })
+                    if ($scope.filterObj.owner == undefined) {
+                        $scope.filterObj.owner = [];
+                        $scope.filterObj.owner.push({ _id: obj._id, name: obj.name, email: obj.email, photo: obj.photo, checked: true })
 
                         _.pull($scope.searchResultArray, obj);
                     } else {
-                        $scope.filterObj.ownerName.push({ _id: obj._id, name: obj.name, email: obj.email, photo: obj.photo, checked: true })
+                        $scope.filterObj.owner.push({ _id: obj._id, name: obj.name, email: obj.email, photo: obj.photo, checked: true })
                         _.pull($scope.searchResultArray, obj);
                     }
                     $ionicPlatform.ready(function () {
@@ -264,7 +264,7 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
                     });
 
                 } else {
-                    _.pull($scope.filterObj.ownerName, selectedItem);
+                    _.pull($scope.filterObj.owner, selectedItem);
                 }
                 break;
 
@@ -463,22 +463,22 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
                 console.log("Invalid selection");
         }
 
-        // console.log($scope.filterObj.ownerName);
+        // console.log($scope.filterObj.owner);
 
     };
 
     //To remove record from preselected list 
     $scope.removeRecord = function (value1, value2) {
         switch (value2) {
-            case "ownerName":
-                var selectedItem = _.find($scope.filterObj.ownerName, function (o) {
+            case "owner":
+                var selectedItem = _.find($scope.filterObj.owner, function (o) {
                     if (o._id == value1._id) {
                         return o;
                     }
                 });
                 console.log(selectedItem);
                 if (selectedItem != undefined) {
-                    _.pull($scope.filterObj.ownerName, selectedItem);
+                    _.pull($scope.filterObj.owner, selectedItem);
                     value1.checked = false;
                     $scope.searchResultArray.push(value1);
                 }
@@ -572,21 +572,15 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
         }
     };
 
-    //To save filter obj in jStorage and return to filter page
-    // $scope.saveList = function () {
-    //     $.jStorage.set('filterObj', $scope.filterObj);
-    //     $state.go('filter');
-    // }
-
     //To clear filter 
     $scope.clearfilter = function (value2) {
         switch (value2) {
-            case "ownerName":
+            case "owner":
 
-                _.each($scope.filterObj.ownerName, function (n) {
+                _.each($scope.filterObj.owner, function (n) {
                     $scope.searchResultArray.push(n);
                 });
-                $scope.filterObj.ownerName = [];
+                $scope.filterObj.owner = [];
 
                 break;
 
@@ -635,4 +629,4 @@ connector.controller('SearchPageCtrl', function ($scope, $state, $stateParams, M
                 console.log("Invalid selection");
         }
     }
-});
+})

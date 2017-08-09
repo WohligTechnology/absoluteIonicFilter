@@ -1,4 +1,4 @@
-connector.controller('TimelinestatusCtrl', function ($scope, $state, $stateParams, MyServices, $ionicPlatform) {
+connector.controller('TimelinestatusCtrl', function ($scope, $state, $stateParams, MyServices, $ionicPlatform, $ionicScrollDelegate) {
     $scope.filterObj = {};
     $scope.filterObj = _.cloneDeep($.jStorage.get('filterObj'));
     $scope.isList = 1;
@@ -20,10 +20,12 @@ connector.controller('TimelinestatusCtrl', function ($scope, $state, $stateParam
     //To switch tab
     $scope.changeTab = function (value) {
         if (value == 1) {
+            $ionicScrollDelegate.scrollTop();
             $scope.isList = 1;
             $scope.activeButton1 = 'active';
             $scope.activeButton2 = '';
         } else {
+            $ionicScrollDelegate.scrollTop();
             $scope.isList = 2;
             $scope.activeButton1 = '';
             $scope.activeButton2 = 'active';
@@ -98,6 +100,7 @@ connector.controller('TimelinestatusCtrl', function ($scope, $state, $stateParam
         _.each($scope.filterObj.timelineStatus, function (n) {
             $scope.timelineStatus.push(n);
         });
+        $scope.filterObj.isActive = null;
         $scope.filterObj.timelineStatus = [];
     }
 })

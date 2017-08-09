@@ -4,6 +4,7 @@ connector.controller('FilterCtrl', function ($scope, $state, $stateParams) {
     $scope.isShowDate = true;
     $scope.isShowEstimated = false;
     $scope.isActive = null;
+    $scope.isCategory = false;
 
     //Set j storage to store filter obj
     var isJStorage = $.jStorage.get('filterObj');
@@ -17,6 +18,11 @@ connector.controller('FilterCtrl', function ($scope, $state, $stateParams) {
             $scope.isActive = 'B';
         }
         console.log("$scope.filterObj", $scope.filterObj);
+    };
+
+    //To go back
+    $scope.getBack = function () {
+        $state.go('app.filterResult');
     }
 
     //Function to get search text from filter page
@@ -33,13 +39,19 @@ connector.controller('FilterCtrl', function ($scope, $state, $stateParams) {
     //To show estimated loss input fields
     $scope.getRange = function () {
         $scope.isShowEstimated = !$scope.isShowEstimated;
+    };
+
+    //To show category
+    $scope.getCategory = function () {
+        $scope.isCategory = !$scope.isCategory;
     }
 
     //To clear all fields
     $scope.clear = function () {
         $scope.filterObj = {};
+        $scope.filterObj.ownerStatus = "Global";
         $scope.isActive = null
-        $.jStorage.flush('filterObj');
+        // $.jStorage.flush('filterObj');
         $.jStorage.set('filterObj', {});
     };
 
@@ -51,8 +63,14 @@ connector.controller('FilterCtrl', function ($scope, $state, $stateParams) {
     //Function to apply filter
     $scope.applyFilter = function () {
         // if (!_.isEmpty()) {
-        $state.go('filterResult');
+        $state.go('app.filterResult');
         //}
+    };
+
+    //To change the category of assignment
+    $scope.category = function (value) {
+        $scope.filterObj.ownerStatus = value;
+        $.jStorage.set('filterObj', $scope.filterObj);
     };
 
     $scope.changeStatus = function (value) {

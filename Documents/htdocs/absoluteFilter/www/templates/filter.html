@@ -1,24 +1,40 @@
 <ion-view>
     <ion-header-bar align-title="left" class="bar-positive">
+        <button class="button button-clear back-arrow-margin header-btn-center" ng-click="applyFilter();"> 
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
         <h1 class="title header-title-center">Filter</h1>
         <div class="buttons">
             <button class="button no-animation button-clear header-right-button header-btn-center" ng-click="clear();">
             Clear
             </button>
-            <button class="button no-animation button-clear header-right-button header-btn-center" ng-click="applyFilter();">
+            <!--<button class="button no-animation button-clear header-right-button header-btn-center" ng-click="applyFilter();">
 	            Apply
-            </button>
+            </button>-->
         </div>
 
     </ion-header-bar>
     <ion-content>
         <div class="list list-inset">
+
+            <!-- For Assignment type -->
+            <!-- FOR Timeline Status -->
+            <button class="button filterPage-list-btn" ng-click="getCategory();">
+	            <span>{{filterObj.ownerStatus}}</span>
+            </button>
+            <div ng-if="isCategory == true">
+                <ion-radio ng-model="filterObj.ownerStatus" ng-click="category('Global')" ng-value="'Global'">Global</ion-radio>
+                <ion-radio ng-model="filterObj.ownerStatus" ng-click="category('My files')" ng-value="'My files'">My Assignment</ion-radio>
+                <ion-radio ng-model="filterObj.ownerStatus" ng-click="category('Shared with me')" ng-value="'Shared with me'">Shared With Me</ion-radio>
+                <ion-radio ng-model="filterObj.ownerStatus" ng-click="category('All files')" ng-value="'All files'">All Assignment</ion-radio>
+            </div><br>
+
             <!-- FOR OWNER NAME -->
-            <button class="button filterPage-list-btn" ng-click="getDataForFilter('ownerName');" ng-if="filterObj.ownerName.length == 0 || filterObj.ownerName == undefined">
+            <button class="button filterPage-list-btn" ng-click="getDataForFilter('owner');" ng-if="filterObj.owner.length == 0 || filterObj.owner == undefined">
 	            <span>Owner Name</span>
             </button>
-            <button class="button filterPage-list-btn" ng-click="getDataForFilter('ownerName');" ng-if="filterObj.ownerName.length>0">
-	           Owner Name: <span ng-repeat="item in filterObj.ownerName">{{item.name}},</span>
+            <button class="button filterPage-list-btn" ng-click="getDataForFilter('owner');" ng-if="filterObj.owner.length>0">
+	           Owner Name: <span ng-repeat="item in filterObj.owner">{{item.name}},</span>
             </button>
 
             <!-- FOR INSURER -->
@@ -109,7 +125,7 @@
 	            Timeline Status: <span ng-repeat="item in filterObj.timelineStatus">{{item}},</span>
             </button>
             <!--<label class="item item-input botton-margin">
-                <input type="text" ng-model="filterObj.ownerName"placeholder="Owner Name" ng-change="getSearchText(filterObj.ownerName,'ownerName');">
+                <input type="text" ng-model="filterObj.owner"placeholder="Owner Name" ng-change="getSearchText(filterObj.owner,'owner');">
             </label>-->
 
             <!--<div class="row">
